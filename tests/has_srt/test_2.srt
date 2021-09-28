@@ -1,0 +1,14 @@
+0
+00:00:00,000 --> 00:00:04,132
+Cześć, nazywam się Kajo Rudziński 
+i prowadzę Kajo Data. Chciałbym Cię zaprosić
+
+1
+00:00:04,212 --> 00:00:09,432
+na pierwszą część wywiadu z Tomaszem Zarzyką, 
+projektantem systemów informatycznych
+
+2
+00:00:09,512 --> 00:00:16,195
+i właścicielem X-martu, a generalnie gościem, 
+który ma już lata, lata doświadczenia w pracy
