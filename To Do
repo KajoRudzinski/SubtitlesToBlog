@@ -1,19 +1,2 @@
-To Do   |   Check if there is a SRT file in designated folder
-To Do   |   Read SRT file from filepath to memory
-
-temp notes
->>> s = '123456789'
->>> s[-2:]
-'89'
->>> s[:2]
-'12'
->>> s[4:6]
-'56'
-
-import os
-
-for file in os.listdir('.'):
-    if fnmatch.fnmatch(file, '*.txt'):
-        print(file)
-def test_p():
-    assert 1 == 1
+Done  |   Check if there is a SRT file in designated folder
+Done  |   Read SRT file from filepath to memory
