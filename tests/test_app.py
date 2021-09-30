@@ -24,3 +24,13 @@ def test_read_file():
 
 def test_increment():
     assert app.increment_by_1(1) == 2
+
+
+def test_is_not_empty():
+    assert app.is_not_empty('') is False
+    assert app.is_not_empty('i') is True
+
+
+def test_is_not_timestamp():
+    assert app.is_not_timestamp('00:00:04,212 --> 00:00:09,432') is False
+    assert app.is_not_timestamp('a') is True

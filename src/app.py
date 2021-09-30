@@ -27,4 +27,11 @@ def increment_by_1(i: int) -> int:
     return i + 1
 
 
+def is_not_empty(s: str) -> bool:
+    return s != ''
+
+
+def is_not_timestamp(s: str) -> bool:
+    return "-->" not in s
+
 
