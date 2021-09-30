@@ -18,4 +18,7 @@ def test_read_path_has_srt():
     ) == os.path.join(os.getcwd(), has_srt, 'test.srt')
 
 
+def test_read_file():
+    assert app.read_file('line_test_file.txt') == ['l1', 'l2', '3']
+
 
