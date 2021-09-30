@@ -23,7 +23,8 @@ def read_file(path: str) -> list:
     return line_list
 
 
-
+def increment_by_1(i: int) -> int:
+    return i + 1
 
 
 

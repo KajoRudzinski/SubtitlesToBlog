@@ -22,3 +22,5 @@ def test_read_file():
     assert app.read_file('line_test_file.txt') == ['l1', 'l2', '3']
 
 
+def test_increment():
+    assert app.increment_by_1(1) == 2
