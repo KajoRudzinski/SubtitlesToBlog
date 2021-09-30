@@ -10,9 +10,7 @@ def read_path(path: str):
         if f[-4:] == '.srt':
             srt_file = f
             break
-    if srt_file == '':
-        return None
-    else:
+    if srt_file != '':
         return os.path.join(path, srt_file)
 
 
