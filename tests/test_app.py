@@ -7,12 +7,14 @@ has_no_srt = "has_no_srt\\"
 
 
 def test_read_path_no_srt():
-    p = os.path.join(os.getcwd(), has_no_srt)
-    rp = app.read_path(p)
-    assert rp == 'No SRT File'
+    assert app.read_path(
+        os.path.join(os.getcwd(), has_no_srt)
+    ) is None
 
 
 def test_read_path_has_srt():
-    p = os.path.join(os.getcwd(), has_srt)
-    rp = app.read_path(p)
-    assert rp == os.path.join(os.getcwd(), has_srt, 'test.srt')
+    assert app.read_path(
+        os.path.join(os.getcwd(), has_srt)
+    ) == os.path.join(os.getcwd(), has_srt, 'test.srt')
+
+
