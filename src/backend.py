@@ -17,8 +17,7 @@ def read_path(path: str) -> str:
 def read_file(path: str) -> list:
     """Given a file from path
     returns a list of lines in this file"""
-    line_list = []
-    with open(path, 'r') as file:
+    with open(path, 'r', encoding='utf8') as file:
         line_list = [(line.strip()) for line in file]
     return line_list
 
@@ -60,3 +59,11 @@ def concat_lines(lines_list: list) -> str:
         line_nr = increment_by_1(line_nr)
     return text
 
+
+def prepare_text(path: str) -> str:
+    return concat_lines(read_file(read_path(path)))
+
+
+def write_file(path: str, text: str):
+    with open(path, 'w', encoding='utf8') as file:
+        file.write(text)
