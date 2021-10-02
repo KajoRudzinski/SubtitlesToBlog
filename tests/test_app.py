@@ -1,5 +1,4 @@
 from src import app
-
 import os
 
 has_srt = "has_srt\\"
@@ -34,3 +33,22 @@ def test_is_not_empty():
 def test_is_not_timestamp():
     assert app.is_not_timestamp('00:00:04,212 --> 00:00:09,432') is False
     assert app.is_not_timestamp('a') is True
+
+
+def test_concat_lines():
+    test_list = [
+        '0'
+        , '00:00:00,000 --> 00:00:04,132'
+        , '1'
+        , '2'
+        , '3'
+        , ''
+        , '1'
+        , ',00:00:04,212 --> 00:00:09,432'
+        , 'a'
+        , ''
+        , '2'
+        , '00:00:04,212 --> 00:00:09,432'
+        , 'a'
+    ]
+    assert app.concat_lines(test_list) == '1 2 3 a a '
