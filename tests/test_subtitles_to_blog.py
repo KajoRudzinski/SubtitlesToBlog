@@ -35,6 +35,28 @@ def create_test_srt_file(f):
         )
 
 
+def create_test_srt_like_lines():
+    return [
+        '0',
+        '00:00:00,000 --> 00:00:04,132',
+        'line 1',
+        'line 2',
+        '',
+        '1',
+        '00:00:04,212 --> 00:00:09,432',
+        '1',
+        '2',
+        '',
+        '2',
+        '00:00:10,000 --> 00:00:14,132',
+        'line 1',
+        '',
+        '3',
+        '00:00:24,212 --> 00:00:29,432',
+        '1'
+    ]
+
+
 def remove_test_files(f):
     try:
         os.remove(f)
@@ -96,3 +118,27 @@ class TestLineConverter(TestCase):
         self.assertFalse(stb.LineConverter().is_not_timestamp(
             '00:00:04,212 --> 00:00:09,432'))
         self.assertTrue(stb.LineConverter().is_not_timestamp('a'))
+
+    def test_all_conditions_are_true(self):
+        self.assertTrue(stb.LineConverter().all_conditions_are_true(
+            True, True, True))
+        self.assertFalse(stb.LineConverter().all_conditions_are_true(
+            True, False, True))
+
+    def test_expand_text_with_new_line(self):
+        lc = stb.LineConverter()
+        for char in ['a', 'b', 'c']:
+            lc.expand_text_with_new_line(char)
+        self.assertEqual(lc.text, 'a b c ')
+
+    def test_go_to_next_line(self):
+        lc = stb.LineConverter()
+        for i in range(6):
+            lc.go_to_next_line()
+        self.assertEqual(lc.current_line_nr, 7)
+
+    def test_concat_lines(self):
+        lc = stb.LineConverter()
+        lc.concat_lines(create_test_srt_like_lines())
+        self.assertEqual(
+            lc.text, 'line 1 line 2 1 2 line 1 1 ')

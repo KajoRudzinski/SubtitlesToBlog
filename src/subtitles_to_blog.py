@@ -26,6 +26,9 @@ class FileIO:
 class LineConverter:
     def __init__(self):
         self.line_list = []
+        self.text = ''
+        self.current_line = ''
+        self.current_line_nr = 1
 
     @staticmethod
     def is_not_empty(s: str) -> bool:
@@ -37,3 +40,29 @@ class LineConverter:
         """Checks if string contains characters
         suggesting it's a timestamp line"""
         return "-->" not in s
+
+    @staticmethod
+    def all_conditions_are_true(*args):
+        return all([*args])
+
+    def expand_text_with_new_line(self, line: str):
+        self.text = self.text + line + ' '
+
+    def go_to_next_line(self):
+        self.current_line_nr = self.current_line_nr + 1
+
+    def concat_lines(self, lines_list: list):
+        """Given a list of strings
+        returns one concatenated string of non technical ones"""
+        for line in lines_list:
+            if self.current_line_nr != 1:
+                previous_line = self.current_line
+                self.current_line = line
+                if self.all_conditions_are_true(
+                        self.is_not_empty(self.current_line),
+                        self.is_not_empty(previous_line),
+                        self.is_not_timestamp(self.current_line),
+                        self.current_line_nr != 1
+                ):
+                    self.expand_text_with_new_line(self.current_line)
+            self.go_to_next_line()
