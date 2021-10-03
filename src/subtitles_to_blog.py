@@ -7,10 +7,8 @@ class FileIO:
         self.default_directory = 'C:\\'
         self.file_path = ''
         self.blog_post_file_name = 'blog_post.txt'
-        self.line_list = []
-        self.file_text = ''
 
-    def get_srt_file_path(self, path: str):
+    def get_srt_file_from_path(self, path: str):
         """Given a folder with SRT files containing subtitles
         assigns path to the first found SRT file to file_path"""
         for file in os.listdir(path):
@@ -18,8 +16,13 @@ class FileIO:
                 self.file_path = os.path.join(path, file)
                 break
 
-    def get_line_list(self):
+    def get_line_list_from_srt(self):
         """Given a file path to a SRT file
-        assigns the list of lines in this file to line_list"""
+        returns the list of lines in this file"""
         with open(self.file_path, 'r', encoding='utf8') as file:
-            self.line_list = [(line.strip()) for line in file]
+            return [(line.strip()) for line in file]
+
+
+class LineConverter:
+    def __init__(self):
+        self.line_list = []

@@ -55,19 +55,13 @@ class TestFileIO(TestCase):
     def test_init_file_name(self):
         self.assertEqual(stb.FileIO().blog_post_file_name, 'blog_post.txt')
 
-    def test_init_line_list(self):
-        self.assertEqual(stb.FileIO().line_list, [])
-
-    def test_init_file_text(self):
-        self.assertEqual(stb.FileIO().file_text, '')
-
     def test_get_srt_file_path_with_srt(self):
         global test_file
         global test_file_2
         create_test_srt_file(test_file)
         create_test_srt_file(test_file_2)
         f = stb.FileIO()
-        f.get_srt_file_path(os.getcwd())
+        f.get_srt_file_from_path(os.getcwd())
         self.assertEqual(
             f.file_path, os.path.join(
                 os.getcwd(), test_file
@@ -78,14 +72,18 @@ class TestFileIO(TestCase):
 
     def test_get_srt_file_path_without_srt(self):
         f = stb.FileIO()
-        f.get_srt_file_path(os.getcwd())
+        f.get_srt_file_from_path(os.getcwd())
         self.assertEqual(f.file_path, '')
 
     def test_get_line_list(self):
         global lines_test_file
         create_line_test_file(lines_test_file)
         f = stb.FileIO()
-        f.get_srt_file_path(os.getcwd())
-        f.get_line_list()
-        self.assertEqual(f.line_list, ['1', '2'])
+        f.get_srt_file_from_path(os.getcwd())
+        self.assertEqual(f.get_line_list_from_srt(), ['1', '2'])
         remove_test_files(lines_test_file)
+
+
+class TestLineConverter(TestCase):
+    def test_init_line_list(self):
+        self.assertEqual(stb.LineConverter().line_list, [])
