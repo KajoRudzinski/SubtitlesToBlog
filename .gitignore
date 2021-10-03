@@ -2,5 +2,4 @@
 src/__pycache__
 tests/__pycache__
 *.csv
-src/temp.py
-src/temp.py
+temp/
