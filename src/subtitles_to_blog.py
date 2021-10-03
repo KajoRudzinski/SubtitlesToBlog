@@ -20,3 +20,5 @@ class FileIO:
     def get_line_list(self):
         """Given a file path to a SRT file
         assigns the list of lines in this file to line_list"""
+        with open(self.file_path, 'r', encoding='utf8') as file:
+            self.line_list = [(line.strip()) for line in file]

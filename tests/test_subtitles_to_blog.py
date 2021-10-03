@@ -4,11 +4,17 @@ import os
 
 test_file = 'test.srt'
 test_file_2 = 'test_2.srt'
+lines_test_file = 'line_test.srt'
+
+
+def create_line_test_file(f):
+    with open(f, 'w') as file:
+        file.write('1\n2')
 
 
 def create_test_srt_file(f):
-    with open(f, 'w', encoding='utf8') as f:
-        f.write(
+    with open(f, 'w', encoding='utf8') as file:
+        file.write(
            '0\n' +
            '00:00:00,000 --> 00:00:04,132\n' +
            'line 1\n' +
@@ -71,3 +77,12 @@ class TestFileIO(TestCase):
         f = stb.FileIO()
         f.get_srt_file_path(os.getcwd())
         self.assertEqual(f.file_path, '')
+
+    def test_get_line_list(self):
+        global lines_test_file
+        create_line_test_file(lines_test_file)
+        f = stb.FileIO()
+        f.get_srt_file_path(os.getcwd())
+        f.get_line_list()
+        self.assertEqual(f.line_list, ['1', '2'])
+        remove_test_files(lines_test_file)
