@@ -87,3 +87,12 @@ class TestFileIO(TestCase):
 class TestLineConverter(TestCase):
     def test_init_line_list(self):
         self.assertEqual(stb.LineConverter().line_list, [])
+
+    def test_is_not_empty(self):
+        self.assertTrue(stb.LineConverter().is_not_empty('a'))
+        self.assertFalse(stb.LineConverter().is_not_empty(''))
+
+    def test_is_not_timestamp(self):
+        self.assertFalse(stb.LineConverter().is_not_timestamp(
+            '00:00:04,212 --> 00:00:09,432'))
+        self.assertTrue(stb.LineConverter().is_not_timestamp('a'))

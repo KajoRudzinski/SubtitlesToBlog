@@ -26,3 +26,14 @@ class FileIO:
 class LineConverter:
     def __init__(self):
         self.line_list = []
+
+    @staticmethod
+    def is_not_empty(s: str) -> bool:
+        """Checks if string is empty"""
+        return s != ''
+
+    @staticmethod
+    def is_not_timestamp(s: str) -> bool:
+        """Checks if string contains characters
+        suggesting it's a timestamp line"""
+        return "-->" not in s
