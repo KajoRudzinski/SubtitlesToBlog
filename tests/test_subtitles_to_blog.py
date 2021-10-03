@@ -3,6 +3,7 @@ from src import subtitles_to_blog as stb
 import os
 
 test_file = 'test.srt'
+test_file_2 = 'test_2.srt'
 
 
 def create_test_srt_file(f):
@@ -48,9 +49,11 @@ class TestFileIO(TestCase):
     def test_init_file_name(self):
         self.assertEqual(stb.FileIO().blog_post_file_name, 'blog_post.txt')
 
-    def test_get_srt_file_path(self):
+    def test_get_srt_file_path_with_srt(self):
         global test_file
+        global test_file_2
         create_test_srt_file(test_file)
+        create_test_srt_file(test_file_2)
         f = stb.FileIO()
         f.get_srt_file_path(os.getcwd())
         self.assertEqual(
@@ -59,3 +62,9 @@ class TestFileIO(TestCase):
             )
         )
         remove_test_files(test_file)
+        remove_test_files(test_file_2)
+
+    def test_get_srt_file_path_without_srt(self):
+        f = stb.FileIO()
+        f.get_srt_file_path(os.getcwd())
+        self.assertEqual(f.file_path, '')

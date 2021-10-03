@@ -15,3 +15,4 @@ class FileIO:
             if file[-4:] == '.srt':
                 self.file_path = os.path.join(path, file)
                 break
+
