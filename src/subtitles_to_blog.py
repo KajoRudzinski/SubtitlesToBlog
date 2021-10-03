@@ -8,6 +8,7 @@ class FileIO:
         self.file_path = ''
         self.blog_post_file_name = 'blog_post.txt'
         self.line_list = []
+        self.file_text = ''
 
     def get_srt_file_path(self, path: str):
         """Given a folder with SRT files containing subtitles

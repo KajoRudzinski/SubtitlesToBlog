@@ -58,6 +58,9 @@ class TestFileIO(TestCase):
     def test_init_line_list(self):
         self.assertEqual(stb.FileIO().line_list, [])
 
+    def test_init_file_text(self):
+        self.assertEqual(stb.FileIO().file_text, '')
+
     def test_get_srt_file_path_with_srt(self):
         global test_file
         global test_file_2
