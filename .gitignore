@@ -3,3 +3,4 @@ src/__pycache__
 tests/__pycache__
 *.csv
 temp/
+tests/__init__.py
