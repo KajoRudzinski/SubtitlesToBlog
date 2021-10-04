@@ -57,6 +57,8 @@ def create_test_srt_like_lines():
     ]
 
 
+
+
 def remove_test_files(f):
     try:
         os.remove(f)
@@ -66,10 +68,10 @@ def remove_test_files(f):
 
 class TestFileIO(TestCase):
     def test_init_temp_directory(self):
-        self.assertEqual(stb.FileIO().temp_directory, '')
+        self.assertEqual(stb.FileIO().temp_dir, '')
 
     def test_init_default_directory(self):
-        self.assertEqual(stb.FileIO().default_directory, 'C:\\')
+        self.assertEqual(stb.FileIO().default_dir, '')
 
     def test_init_file_path(self):
         self.assertEqual(stb.FileIO().file_path, '')
@@ -104,6 +106,14 @@ class TestFileIO(TestCase):
         f.get_srt_file_from_path(os.getcwd())
         self.assertEqual(f.get_line_list_from_srt(), ['1', '2'])
         remove_test_files(lines_test_file)
+
+    def test_get_def_dir_from_config_file(self):
+        # For some reason creating the file
+        # within test results in error
+        # So default_dit.txt is provided in tests
+        f = stb.FileIO()
+        f.get_def_dir_from_config_file()
+        self.assertTrue(f.default_dir != '')
 
 
 class TestLineConverter(TestCase):

@@ -1,10 +1,16 @@
 import os
 
 
+hello = """
+>>> SubtitlesToBlog\n
+>>> Created by: Kajo Rudziński\n
+"""
+
+
 class FileIO:
     def __init__(self):
-        self.temp_directory = ''
-        self.default_directory = 'C:\\'
+        self.temp_dir = ''
+        self.default_dir = ''
         self.file_path = ''
         self.blog_post_file_name = 'blog_post.txt'
 
@@ -21,6 +27,12 @@ class FileIO:
         returns the list of lines in this file"""
         with open(self.file_path, 'r', encoding='utf8') as file:
             return [(line.strip()) for line in file]
+
+    def get_def_dir_from_config_file(self):
+        """Reads default_dir.txt provided in src to
+        assign default directory for SRT files to default_dir"""
+        with open('default_dir.txt', 'r', encoding='utf8') as file:
+            self.default_dir = file.read()
 
 
 class LineConverter:
