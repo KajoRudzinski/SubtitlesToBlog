@@ -1,18 +1,14 @@
 import os
 
 
-hello = """
->>> SubtitlesToBlog\n
->>> Created by: Kajo Rudziński\n
-"""
-
-
 class FileIO:
     def __init__(self):
         self.temp_dir = ''
         self.default_dir = ''
         self.file_path = ''
         self.blog_post_file_name = 'blog_post.txt'
+        self.encoding = 'utf8'
+        self.default_dir_file = 'default_dir.txt'
 
     def get_srt_file_from_path(self, path: str):
         """Given a folder with SRT files containing subtitles
@@ -25,14 +21,21 @@ class FileIO:
     def get_line_list_from_srt(self):
         """Given a file path to a SRT file
         returns the list of lines in this file"""
-        with open(self.file_path, 'r', encoding='utf8') as file:
+        with open(self.file_path, 'r', encoding=self.encoding) as file:
             return [(line.strip()) for line in file]
 
     def get_def_dir_from_config_file(self):
         """Reads default_dir.txt provided in src to
         assign default directory for SRT files to default_dir"""
-        with open('default_dir.txt', 'r', encoding='utf8') as file:
+        with open(self.default_dir_file, 'r', encoding=self.encoding) as file:
             self.default_dir = file.read()
+
+    def print_default_dir_question(self):
+        # Not tested
+        print(
+            "Do you want to use the default path" +
+            " as defined in {}?".format(self.default_dir_file)
+        )
 
 
 class LineConverter:
@@ -78,3 +81,13 @@ class LineConverter:
                 ):
                     self.expand_text_with_new_line(self.current_line)
             self.go_to_next_line()
+
+
+def print_hello():
+    # Not tested
+    print("""
+    >>> SubtitlesToBlog\n
+    >>> Created by: Kajo Rudziński\n
+    \nSubtitlesToBlog converts .srt files to .txt files\n
+    in order to turn subtitles into almost ready blog post.\n
+    """)

@@ -1,4 +1,5 @@
 from unittest import TestCase
+from unittest import mock
 from src import subtitles_to_blog as stb
 import os
 
@@ -152,3 +153,4 @@ class TestLineConverter(TestCase):
         lc.concat_lines(create_test_srt_like_lines())
         self.assertEqual(
             lc.text, 'line 1 line 2 1 2 line 1 1 ')
+
