@@ -33,7 +33,7 @@ class FileIO:
 
     def print_dir_question(self):
         print(
-            "Do you want to use the default directory" +
+            "\nDo you want to use the default directory" +
             " as defined in {}?".format(self.default_dir_file)
         )
 
@@ -51,10 +51,45 @@ class FileIO:
             else:
                 continue
 
+    def get_temp_dir_from_user(self):
+        self.temp_dir = input(
+            'Provide temporary directory for this execution: '
+        )
+
     def choose_dir(self):
         self.print_dir_question()
         self.get_user_input_on_preferred_dir()
 
+    def check_dir_to_save(self):
+        if self.read_from_default_dir:
+            return os.path.join(
+                self.default_dir,
+                self.blog_post_file_name)
+        else:
+            return os.path.join(
+                self.temp_dir,
+                self.blog_post_file_name)
+
+    def print_success(self):
+        print(
+            '\nSuccessfully saved to:\n{}'.format(self.check_dir_to_save())
+        )
+
+    @staticmethod
+    def print_failure(self):
+        print(
+            'File NOT SAVED. Something went wrong :('
+        )
+
+    def save(self, text: str):
+        try:
+            with open(self.check_dir_to_save(), 'w') as file:
+                file.write(text)
+            self.print_success()
+        except Exception:
+            # I know it's broad
+            # but in case of an error I haven't foreseen:
+            self.print_failure()
 
 
 class LineConverter:
@@ -104,8 +139,9 @@ class LineConverter:
 
 def print_hello():
     print("""
-    >>> SubtitlesToBlog\n
-    >>> Created by: Kajo Rudziński\n
-    \nSubtitlesToBlog converts .srt files to .txt files\n
-    in order to turn subtitles into almost ready blog post.\n
+    >>> SubtitlesToBlog
+    >>> Created by: Kajo Rudziński
+    
+    SubtitlesToBlog converts .srt files to .txt files
+    in order to turn subtitles into almost ready blog post.
     """)

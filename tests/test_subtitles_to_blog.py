@@ -1,8 +1,6 @@
 from unittest import TestCase
 from unittest import mock
-import unittest
 from src import subtitles_to_blog as stb
-from nose.tools import *
 import os
 import io
 
@@ -135,6 +133,13 @@ class TestFileIO(TestCase):
                     self.assertTrue(f.read_from_default_dir)
                 else:
                     self.assertFalse(f.read_from_default_dir)
+
+    def test_get_temp_dir_from_user(self):
+        user_temp_dir = 'C:\\'
+        with mock.patch('builtins.input', return_value=user_temp_dir):
+            f = stb.FileIO()
+            f.get_temp_dir_from_user()
+            self.assertEqual(f.temp_dir, user_temp_dir)
 
 
 class TestLineConverter(TestCase):
