@@ -18,4 +18,3 @@ if __name__ == '__main__':
     lines.concat_lines(subtitles)
 
     file.save(lines.text)
-# save file
