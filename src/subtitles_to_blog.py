@@ -9,6 +9,7 @@ class FileIO:
         self.blog_post_file_name = 'blog_post.txt'
         self.encoding = 'utf8'
         self.default_dir_file = 'default_dir.txt'
+        self.read_from_default_dir = True
 
     def get_srt_file_from_path(self, path: str):
         """Given a folder with SRT files containing subtitles
@@ -30,12 +31,28 @@ class FileIO:
         with open(self.default_dir_file, 'r', encoding=self.encoding) as file:
             self.default_dir = file.read()
 
-    def print_default_dir_question(self):
-        # Not tested
+    def print_dir_question(self):
         print(
-            "Do you want to use the default path" +
+            "Do you want to use the default directory" +
             " as defined in {}?".format(self.default_dir_file)
         )
+
+    def get_user_input_on_preferred_dir(self):
+        answer = ''
+        question = "(y)es or (n)o?: "
+        while answer != 'y' or answer != 'n':
+            answer = input(question)
+            if answer == 'y':
+                self.read_from_default_dir = True
+            elif answer == 'n':
+                self.read_from_default_dir = False
+            else:
+                continue
+
+    def choose_dir(self):
+        self.print_dir_question()
+        self.get_user_input_on_preferred_dir()
+
 
 
 class LineConverter:

@@ -59,8 +59,6 @@ def create_test_srt_like_lines():
     ]
 
 
-
-
 def remove_test_files(f):
     try:
         os.remove(f)
@@ -74,6 +72,9 @@ class TestFileIO(TestCase):
 
     def test_init_default_directory(self):
         self.assertEqual(stb.FileIO().default_dir, '')
+
+    def test_users_preferred_dir(self):
+        self.assertTrue(stb.FileIO().read_from_default_dir)
 
     def test_init_file_path(self):
         self.assertEqual(stb.FileIO().file_path, '')
@@ -117,6 +118,12 @@ class TestFileIO(TestCase):
         f.get_def_dir_from_config_file()
         self.assertTrue(f.default_dir != '')
 
+    def test_print_dir_question(self):
+        # Only testing key part of the message, not the exact text
+        with mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
+            stb.FileIO().print_dir_question()
+        self.assertIn(stb.FileIO().default_dir_file, fake_stdout.getvalue())
+
 
 class TestLineConverter(TestCase):
     def test_init_line_list(self):
@@ -158,6 +165,7 @@ class TestLineConverter(TestCase):
 
 class NonClassFunctions(TestCase):
     def test_init_line_list(self):
+        # Only testing it contains a message, not the exact text
         with mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
             stb.print_hello()
         self.assertTrue(fake_stdout.getvalue() != '')
