@@ -2,6 +2,7 @@ from unittest import TestCase
 from unittest import mock
 from src import subtitles_to_blog as stb
 import os
+import io
 
 test_file = 'test.srt'
 test_file_2 = 'test_2.srt'
@@ -153,4 +154,11 @@ class TestLineConverter(TestCase):
         lc.concat_lines(create_test_srt_like_lines())
         self.assertEqual(
             lc.text, 'line 1 line 2 1 2 line 1 1 ')
+
+
+class NonClassFunctions(TestCase):
+    def test_init_line_list(self):
+        with mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
+            stb.print_hello()
+        self.assertTrue(fake_stdout.getvalue() != '')
 

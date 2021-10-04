@@ -84,7 +84,6 @@ class LineConverter:
 
 
 def print_hello():
-    # Not tested
     print("""
     >>> SubtitlesToBlog\n
     >>> Created by: Kajo Rudziński\n
