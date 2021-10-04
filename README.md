@@ -8,6 +8,6 @@ By almost ready I mean:
 You can either choose to setup a default directory or provide a temporary one during the execution.
 Execution is run for the first found .srt file in chosen directory. Text file is then saved to this directory as well.
 
-In order run the script - run app.py in src folder.
+In order run the script get the src and run app.py.
 
 Enjoy :)
