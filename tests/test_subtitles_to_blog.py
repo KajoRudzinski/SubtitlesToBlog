@@ -1,6 +1,8 @@
 from unittest import TestCase
 from unittest import mock
+import unittest
 from src import subtitles_to_blog as stb
+from nose.tools import *
 import os
 import io
 
@@ -123,6 +125,16 @@ class TestFileIO(TestCase):
         with mock.patch('sys.stdout', new=io.StringIO()) as fake_stdout:
             stb.FileIO().print_dir_question()
         self.assertIn(stb.FileIO().default_dir_file, fake_stdout.getvalue())
+
+    def test_get_user_input_on_preferred_dir(self):
+        for input_value in 'yn':
+            with mock.patch('builtins.input', return_value=input_value):
+                f = stb.FileIO()
+                f.get_user_input_on_preferred_dir()
+                if input_value == 'y':
+                    self.assertTrue(f.read_from_default_dir)
+                else:
+                    self.assertFalse(f.read_from_default_dir)
 
 
 class TestLineConverter(TestCase):

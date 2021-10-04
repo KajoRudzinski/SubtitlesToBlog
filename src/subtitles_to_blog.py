@@ -44,8 +44,10 @@ class FileIO:
             answer = input(question)
             if answer == 'y':
                 self.read_from_default_dir = True
+                break
             elif answer == 'n':
                 self.read_from_default_dir = False
+                break
             else:
                 continue
 
